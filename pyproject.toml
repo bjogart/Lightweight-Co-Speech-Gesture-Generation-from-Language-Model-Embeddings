@@ -1,0 +1,40 @@
+[project]
+name = "py-adapter"
+version = "0.1.0"
+description = ""
+requires-python = ">=3.10,<3.12"
+
+dependencies = [
+  "tqdm",
+  "tgt",
+  "omegaconf",
+  "numpy",
+  "pandas",
+  "scipy",
+  "scikit-learn==1.7.2",
+  "librosa",
+  "soundfile",
+  "matplotlib",
+  "plotly",
+  "pyrender",
+  "trimesh",
+  "torch",
+  "smplx",
+  "accelerate",
+  "bitsandbytes",
+  "mistral-common",
+  "transformers==5.*",
+  "rotary-embedding-torch",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.ruff]
+indent-width = 2
+line-length = 80
