@@ -1,23 +1,24 @@
-import librosa
-from typing import Generator, Callable
 import gc
 import json
 import os
+import random
 import time
+from collections.abc import Callable, Generator
+
+import librosa
 import numpy as np
 import torch
-import dataset
-import models
-import util
+from tqdm import tqdm
+
 import pipeline as pl
-import random
-from related.emage.models.audio.modeling_emage_audio import (
+from PantoMatrix.models.emage_audio.modeling_emage_audio import (
   EmageAudioModel,
   EmageVQModel,
 )
+from scripts import dataset, models, util
 
 N_WARMUP_FILES = 10
-ADAPTER_CONTEXT_SIZE = 150
+PREDICTOR_CONTEXT_SIZE = 150
 
 
 class Stopwatch:
@@ -35,20 +36,20 @@ class Stopwatch:
     self._t_start = 0.0
 
 
-def adapter_forward(
-  adapter: models.TransformerSequenceNoBiasAdapter,
+def predictor_forward(
+  predictor: models.TransformerSequenceNoBiasPredictor,
   stride: int,
   batch_size: int,
   aligned_embeds: np.ndarray,
   latency_stopwatch: Stopwatch,
-  context_size: int = ADAPTER_CONTEXT_SIZE,
+  context_size: int = PREDICTOR_CONTEXT_SIZE,
 ) -> torch.Tensor:
   preprocess = pl.context_preprocess(context_size, batch_size, stride)
   acc = {}
   with torch.no_grad():
     for batch in preprocess(aligned_embeds):
       latency_stopwatch.start()
-      batch_preds = adapter(batch.to(util.DEVICE))
+      batch_preds = predictor(batch.to(util.DEVICE))
       latency_stopwatch.end()
       for part, logits in batch_preds.items():
         acc.setdefault(part, []).append(logits[:, -stride:, :].cpu())
@@ -109,9 +110,14 @@ def bench(
     torch.cuda.empty_cache()
 
   results: list[list[dict[str, str | int | float | list[int | float]]]] = []
-  for _ in range(n_reps):
+  for _ in tqdm(range(n_reps), position=0):
     results.append([])
-    for file_id, inputs in make_inputs(True):
+    for file_id, inputs in tqdm(
+      make_inputs(True),
+      position=1,
+      leave=False,
+      total=sum(1 for _ in make_inputs(False)),
+    ):
       latency_stopwatch = Stopwatch()
       torch.cuda.reset_peak_memory_stats(util.DEVICE)
       torch.cuda.synchronize(util.DEVICE)
@@ -143,40 +149,75 @@ if __name__ == "__main__":
     description="Benchmark gesture generation throughput, latency, and peak VRAM."
   )
   parser.add_argument(
-    "--output", "-o", default="bench_results.json", metavar="PATH",
+    "--output",
+    "-o",
+    default="bench_results.json",
+    metavar="PATH",
     help="Output JSON path (default: bench_results.json)",
   )
   parser.add_argument(
-    "--n-reps", type=int, default=10, metavar="N",
+    "--n-reps",
+    type=int,
+    default=10,
+    metavar="N",
     help="Number of benchmark repetitions (default: 10)",
   )
   subparsers = parser.add_subparsers(dest="model", required=True)
 
-  adapter_parser = subparsers.add_parser("adapter", help="Benchmark the adapter")
-  adapter_parser.add_argument("weights", help="Path to adapter weights (.pth file)")
-  adapter_parser.add_argument("--stride", type=int, default=1, metavar="N")
-  adapter_parser.add_argument("--context-size", type=int, default=ADAPTER_CONTEXT_SIZE, metavar="N")
-  adapter_parser.add_argument("--n-layers", type=int, default=2, metavar="N")
-  adapter_parser.add_argument("--model-dim", type=int, default=768, metavar="N")
-  adapter_parser.add_argument("--n-heads", type=int, default=12, metavar="N")
-  adapter_parser.add_argument("--batch-size", type=int, default=32, metavar="N")
+  predictor_parser = subparsers.add_parser(
+    "predictor", help="Benchmark the predictor"
+  )
+  predictor_parser.add_argument(
+    "weights", help="Path to predictor weights (.pth file)"
+  )
+  predictor_parser.add_argument("--stride", type=int, default=1, metavar="N")
+  predictor_parser.add_argument(
+    "--context-size", type=int, default=PREDICTOR_CONTEXT_SIZE, metavar="N"
+  )
+  predictor_parser.add_argument("--n-layers", type=int, default=2, metavar="N")
+  predictor_parser.add_argument(
+    "--model-dim", type=int, default=768, metavar="N"
+  )
+  predictor_parser.add_argument("--n-heads", type=int, default=12, metavar="N")
+  predictor_parser.add_argument(
+    "--batch-size", type=int, default=32, metavar="N"
+  )
+  predictor_parser.add_argument(
+    "--window-size",
+    type=int,
+    default=None,
+    metavar="N",
+    help="Sliding-window alignment size in frames (default: repeat alignment)",
+  )
 
   subparsers.add_parser("emage", help="Benchmark the EMAGE baseline")
 
   args = parser.parse_args()
 
-  if args.model == "adapter":
-    adapter = models.TransformerSequenceNoBiasAdapter(
+  if args.model == "predictor":
+    predictor = models.TransformerSequenceNoBiasPredictor(
       args.context_size, args.n_layers, args.model_dim, args.n_heads
     )
-    adapter.load_state_dict(torch.load(args.weights, weights_only=True))
-    adapter.eval()
-    adapter.to(util.DEVICE)
+    predictor.load_state_dict(torch.load(args.weights, weights_only=True))
+    predictor.eval()
+    predictor.to(util.DEVICE)
+
+    align = (
+      dataset.align_inputs_mean_sliding_window(args.window_size)
+      if args.window_size
+      else dataset.align_inputs_repeat
+    )
+
     results = bench(
       n_reps=args.n_reps,
-      make_inputs=lambda shuffle: dataset.adapter_inputs(shuffle),
-      forward=lambda inputs, timer: adapter_forward(
-        adapter, args.stride, args.batch_size, inputs, timer, args.context_size
+      make_inputs=lambda shuffle: dataset.predictor_inputs(shuffle, align),
+      forward=lambda inputs, timer: predictor_forward(
+        predictor,
+        args.stride,
+        args.batch_size,
+        inputs,
+        timer,
+        args.context_size,
       ),
     )
   else:

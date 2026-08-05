@@ -1,16 +1,25 @@
+import os
 from dataclasses import dataclass
-import related.emage.utils.rotation_conversions as rc
-from related.emage.models.audio.modeling_emage_audio import EmageVQModel
-from tgt import read_textgrid
+
 import numpy as np
+import smplx
+import torch
+from huggingface_hub import snapshot_download
+from tgt import read_textgrid
 from transformers import (
   Mistral3ForConditionalGeneration,
-  TokenizersBackend,
   SentencePieceBackend,
+  TokenizersBackend,
 )
-from huggingface_hub import snapshot_download
-import torch
-import smplx
+
+from PantoMatrix.emage_utils import rotation_conversions as rc
+from PantoMatrix.models.emage_audio.modeling_emage_audio import EmageVQModel
+
+
+def place_gitignore(dest_dir: str):
+  os.makedirs(dest_dir, exist_ok=True)
+  with open(os.path.join(dest_dir, ".gitignore"), "w") as f:
+    f.write("*")
 
 
 def download_beat2(dest_dir: str):
@@ -21,6 +30,7 @@ def download_evaltools(dest_dir: str):
   snapshot_download(
     "H-Liu1997/emage_evaltools", repo_type="model", local_dir=dest_dir
   )
+  place_gitignore(dest_dir)
 
 
 # Adapted from https://github.com/PantoMatrix/PantoMatrix/blob/3b19fb86cc8830d847f78102118cb3e9c7c99df6/datasets/foot_contact.py
@@ -32,7 +42,7 @@ def compute_foot_contact(
   trans: torch.Tensor,
 ) -> torch.Tensor:
   CHUNK_SIZE = 128
-  n, c = poses.shape
+  n, _ = poses.shape
   betas = torch.tile(betas.reshape(1, 300), (n, 1))
 
   all_joints = []

@@ -1,32 +1,39 @@
-import dataset
+if __name__ == "__main__":
+  from scripts.clone_deps import clone_deps
+
+  clone_deps()
+
 import csv
-from related.emage.models.audio.modeling_emage_audio import EmageVQModel
+import os
+from collections.abc import Callable
+from glob import glob
+from typing import Any, Optional
+
+import numpy as np
+import smplx
+import torch
+from tqdm import tqdm
 from transformers import (
   Mistral3ForConditionalGeneration,
   SentencePieceBackend,
   TokenizersBackend,
 )
-import torch
-import util
-import numpy as np
-from typing import Callable, Any, Optional
-import preprocess
-import os
-from tqdm import tqdm
-from glob import glob
-import smplx
+
+from PantoMatrix.models.emage_audio.modeling_emage_audio import EmageVQModel
+from scripts import dataset, preprocess, util
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-EVALTOOLS_DIR = os.path.join("data", "emage_evaltools")
-BEAT2_DIR = os.path.join("data", "beat2")
+DATA_DIR = "data"
+EVALTOOLS_DIR = os.path.join("emage_evaltools")
+BEAT2_DIR = os.path.join(DATA_DIR, "beat2")
 BEAT2_EN_DIR = os.path.join(BEAT2_DIR, "beat_english_v2.0.0")
 BEAT2_MOTION_DIR = os.path.join(BEAT2_EN_DIR, "smplxflame_30")
 BEAT2_TEXTGRID_DIR = os.path.join(BEAT2_EN_DIR, "textgrid")
-FOOT_CONTACT_DIR = os.path.join("data", "foot_contact")
-TEXT_EMBEDS_DIR = os.path.join("data", "text_embeds")
-POSE_IDXS_DIR = os.path.join("data", "pose_idxs")
-PACK_DIR = os.path.join("data", "pack")
+FOOT_CONTACT_DIR = os.path.join(DATA_DIR, "foot_contact")
+TEXT_EMBEDS_DIR = os.path.join(DATA_DIR, "text_embeds")
+POSE_IDXS_DIR = os.path.join(DATA_DIR, "pose_idxs")
+PACK_DIR = os.path.join(DATA_DIR, "pack")
 
 BEAT2_SPLITS_CSV = os.path.join(
   BEAT2_DIR, "beat_english_v2.0.0", "train_test_split.csv"
@@ -39,7 +46,7 @@ def make_glob_pat(dir: str, ext: str) -> str:
 
 def get_file_id(file: str) -> str:
   base = os.path.basename(file)
-  file_id, ext = os.path.splitext(base)
+  file_id, _ = os.path.splitext(base)
   return file_id
 
 
@@ -47,8 +54,8 @@ def iter_files(
   desc: str,
   glob_pats: list[str],
   make_dest_path: Callable[[str], str],
-  read_file: Callable[[list[str]], Optional[dict[str, Any]]],
-  process: Callable[[dict[str, Any]], Optional[dict[str, Any]]],
+  read_file: Callable[[list[str]], dict[str, Any] | None],
+  process: Callable[[dict[str, Any]], dict[str, Any] | None],
   write_file: Callable[[str, dict[str, Any]], None],
 ):
   files = {}
@@ -113,7 +120,7 @@ def foot_contact_fn(
   return inner
 
 
-def read_textgrid(file: str) -> Optional[dict[str, Any]]:
+def read_textgrid(file: str) -> dict[str, Any] | None:
   # Filter out faulty transcriptions in BEAT2.
   if get_file_id(file) in [
     "3_solomon_0_25_25",  # Transcription is empty
@@ -132,8 +139,8 @@ def read_textgrid(file: str) -> Optional[dict[str, Any]]:
 def text_embeds_fn(
   model: Mistral3ForConditionalGeneration,
   tokenizer: TokenizersBackend | SentencePieceBackend,
-) -> Callable[[dict[str, Any]], Optional[dict[str, np.ndarray]]]:
-  def inner(data: dict[str, Any]) -> Optional[dict[str, np.ndarray]]:
+) -> Callable[[dict[str, Any]], dict[str, np.ndarray] | None]:
+  def inner(data: dict[str, Any]) -> dict[str, np.ndarray] | None:
     text = preprocess.concat_words(data["words"])
     char_durations = preprocess.char_durations_from_words(
       data["words"], data["word_durations"]
@@ -226,6 +233,8 @@ def pack_data_fn(
 
 
 def train_setup():
+  if not os.path.exists(os.path.join(DATA_DIR, ".gitignore")):
+    preprocess.place_gitignore(DATA_DIR)
   if not os.path.exists(EVALTOOLS_DIR):
     preprocess.download_evaltools(EVALTOOLS_DIR)
   if not os.path.exists(BEAT2_DIR):

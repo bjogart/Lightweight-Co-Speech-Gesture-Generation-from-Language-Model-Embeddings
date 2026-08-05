@@ -1,11 +1,12 @@
 import math
-import torch.nn.functional as F
+
 import torch
-import torch.nn as nn
+import torch.nn.functional as F
 from rotary_embedding_torch import RotaryEmbedding
+from torch import nn
 
 
-class MlpContextlessIndexAdapter(nn.Module):
+class MlpContextlessIndexPredictor(nn.Module):
   def __init__(self, hidden_dim: int):
     super().__init__()
     self.stack = nn.Sequential(
@@ -29,7 +30,7 @@ class MlpContextlessIndexAdapter(nn.Module):
     }
 
 
-class FfnContextlessIndexAdapter(nn.Module):
+class FfnContextlessIndexPredictor(nn.Module):
   def __init__(self):
     super().__init__()
     self.gate = nn.Linear(3072, 8192, bias=False)
@@ -52,7 +53,7 @@ class FfnContextlessIndexAdapter(nn.Module):
     }
 
 
-class FfnContextIndexAdapter(nn.Module):
+class FfnContextIndexPredictor(nn.Module):
   def __init__(self, context_size: int):
     super().__init__()
     input_dim = context_size * 3072
@@ -77,7 +78,7 @@ class FfnContextIndexAdapter(nn.Module):
     }
 
 
-class ProjectDownContextIndexAdapter(nn.Module):
+class ProjectDownContextIndexPredictor(nn.Module):
   def __init__(self, context_size: int, project_dims: int, hidden_dims: int):
     super().__init__()
     self.input_proj = FfnLayer(3072, project_dims, hidden_dims)
@@ -113,8 +114,8 @@ class FfnLayer(nn.Module):
     return self.down(up * gate)
 
 
-def ceil_to_multiple(n: int | float, multiple: int) -> int:
-  return int(math.ceil(n / multiple)) * multiple
+def ceil_to_multiple(n: float, multiple: int) -> int:
+  return math.ceil(n / multiple) * multiple
 
 
 class TransformerDecoderLayer(nn.Module):
@@ -165,7 +166,7 @@ class TransformerDecoderBase(nn.Module):
     return hidden_states
 
 
-class TransformerLastIndexAdapter(nn.Module):
+class TransformerLastIndexPredictor(nn.Module):
   def __init__(
     self, context_size: int, n_layers: int, model_dim: int, n_heads: int
   ):
@@ -190,7 +191,7 @@ class TransformerLastIndexAdapter(nn.Module):
     }
 
 
-class TransformerSequenceIndexAdapter(nn.Module):
+class TransformerSequenceIndexPredictor(nn.Module):
   def __init__(
     self, context_size: int, n_layers: int, model_dim: int, n_heads: int
   ):
@@ -215,7 +216,7 @@ class TransformerSequenceIndexAdapter(nn.Module):
     }
 
 
-class TransformerSequenceNoBiasAdapter(nn.Module):
+class TransformerSequenceNoBiasPredictor(nn.Module):
   def __init__(
     self, context_size: int, n_layers: int, model_dim: int, n_heads: int
   ):
@@ -240,7 +241,7 @@ class TransformerSequenceNoBiasAdapter(nn.Module):
     }
 
 
-class TransformerSequenceNoBiasCustomPartsAdapter(nn.Module):
+class TransformerSequenceNoBiasCustomPartsPredictor(nn.Module):
   def __init__(
     self,
     parts: list[str],
@@ -300,7 +301,7 @@ class TransformerEncoderBase(nn.Module):
     return hidden_states
 
 
-class TransformerEncoderSequenceNoBiasAdapter(nn.Module):
+class TransformerEncoderSequenceNoBiasPredictor(nn.Module):
   def __init__(self, n_layers: int, model_dim: int, n_heads: int):
     super().__init__()
     self.base = TransformerEncoderBase(n_layers, model_dim, n_heads)
@@ -371,7 +372,7 @@ class TransformerRopeDecoderBase(nn.Module):
     return hidden_states
 
 
-class TransformerRopeSequenceNoBiasAdapter(nn.Module):
+class TransformerRopeSequenceNoBiasPredictor(nn.Module):
   def __init__(
     self, context_size: int, n_layers: int, model_dim: int, n_heads: int
   ):

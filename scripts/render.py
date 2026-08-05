@@ -1,11 +1,13 @@
-# Visualization code adapted from https://github.com/PantoMatrix/PantoMatrix/emage_utils/fast_render.py
-from tqdm import tqdm
+# Visualization code adapted from https://github.com/PantoMatrix/PantoMatrix/blob/c7356f35f8e39e469e510ccd1bf37e44adf8ec0e/emage_utils/fast_render.py
 import subprocess
-import pyrender
-import trimesh
+
 import numpy as np
+import pyrender
 import torch
-import util
+import trimesh
+from tqdm import tqdm
+
+from scripts import util
 
 VIDEO_WIDTH = 480
 VIDEO_HEIGHT = 720

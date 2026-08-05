@@ -1,5 +1,5 @@
 [project]
-name = "py-adapter"
+name = "lightweight-co-speech-gesture-generation"
 version = "0.1.0"
 description = ""
 requires-python = ">=3.10,<3.12"
@@ -11,18 +11,13 @@ dependencies = [
   "numpy",
   "pandas",
   "scipy",
-  "scikit-learn==1.7.2",
   "librosa",
-  "soundfile",
-  "matplotlib",
-  "plotly",
+  "wget",
   "pyrender",
   "trimesh",
   "torch",
   "smplx",
-  "accelerate",
   "bitsandbytes",
-  "mistral-common",
   "transformers==5.*",
   "rotary-embedding-torch",
 ]

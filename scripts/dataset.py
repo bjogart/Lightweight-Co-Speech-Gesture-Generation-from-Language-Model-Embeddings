@@ -1,17 +1,19 @@
-from numpy.lib.npyio import NpzFile
-import random
-import torch
-from glob import glob
 import os
-from typing import Callable, Generator, Optional
-import scipy.ndimage as ndimage
+import random
+from collections.abc import Callable, Generator
+from glob import glob
+from typing import Optional
+
 import numpy as np
+import torch
+from numpy.lib.npyio import NpzFile
+from scipy import ndimage
 from torch.utils.data import Dataset
-from related.emage.models.audio.modeling_emage_audio import (
+
+from PantoMatrix.models.emage_audio.modeling_emage_audio import (
   EmageVQModel,
   EmageVQVAEConv,
 )
-
 
 SPLIT_IDXS: dict[str, int] = {
   "train": 0,
@@ -143,7 +145,7 @@ def squeeze_chunk(
   _chunk_size: int,
   inputs: np.ndarray,
   targets: dict[str, np.ndarray],
-) -> Optional[dict[str, np.ndarray | dict[str, np.ndarray]]]:
+) -> dict[str, np.ndarray | dict[str, np.ndarray]] | None:
   return {
     "inputs": inputs.squeeze(0),
     "targets": {
@@ -156,7 +158,7 @@ def select_last_frame_as_target(
   chunk_size: int,
   inputs: np.ndarray,
   targets: dict[str, np.ndarray],
-) -> Optional[dict[str, np.ndarray | dict[str, np.ndarray]]]:
+) -> dict[str, np.ndarray | dict[str, np.ndarray]] | None:
   if chunk_size != inputs.shape[0]:
     return None
   return {
@@ -172,7 +174,7 @@ def filter_short_chunks(
   chunk_size: int,
   inputs: np.ndarray,
   targets: dict[str, np.ndarray],
-) -> Optional[dict[str, np.ndarray | dict[str, np.ndarray]]]:
+) -> dict[str, np.ndarray | dict[str, np.ndarray]] | None:
   if chunk_size != inputs.shape[0]:
     return None
   return {"inputs": inputs, "targets": targets}
@@ -189,14 +191,14 @@ def dataset_files(data_dir: str) -> list[str]:
 
 
 def sorted_file_ids(data_dir: str) -> list[str]:
-  return sorted(list(get_file_id(f) for f in dataset_files(data_dir)))
+  return sorted(get_file_id(f) for f in dataset_files(data_dir))
 
 
 def file_path(data_dir: str, file_id: str) -> str:
   return os.path.join(data_dir, f"{file_id}.npz")
 
 
-def get_split_idxs(split: Optional[str] | list[str]) -> list[int]:
+def get_split_idxs(split: str | None | list[str]) -> list[int]:
   if split:
     if type(split) is str:
       return [SPLIT_IDXS[split.lower()]]
@@ -250,11 +252,11 @@ class GestureDataset(Dataset):
     ],
     filter_map_chunk: Callable[
       [int, np.ndarray, dict[str, np.ndarray]],
-      Optional[dict[str, np.ndarray | dict[str, np.ndarray]]],
+      dict[str, np.ndarray | dict[str, np.ndarray]] | None,
     ],
     chunk_size: int,
     chunk_stride: int,
-    split: Optional[str] | list[str],
+    split: str | None | list[str],
     shuffle_files: bool,
   ):
     """
@@ -629,9 +631,8 @@ TEST_SPLIT_FILES: list[str] = [
 ]
 
 
-def adapter_inputs(
-  shuffle: bool,
-  align: Callable[[np.ndarray, np.ndarray, int], np.ndarray] = align_inputs_repeat,
+def predictor_inputs(
+  shuffle: bool, align: Callable[[np.ndarray, np.ndarray, int], np.ndarray]
 ) -> Generator[tuple[str, np.ndarray], None, None]:
   files = TEST_SPLIT_FILES.copy()
   if shuffle:

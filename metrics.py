@@ -1,23 +1,24 @@
-import gc
-import pipeline as pl
-import json
-from tqdm import tqdm
-import librosa
 import dataclasses
-from related.emage.models.audio.modeling_emage_audio import EmageVQModel
-import transformers.utils.logging
-from typing import Callable
-import scipy.linalg as linalg
-import pandas as pd
-import smplx
+import gc
+import json
 import os
-import util
+from collections.abc import Callable
+
+import librosa
 import numpy as np
-from related.emage.utils.motion_rep_transfer import get_motion_rep_numpy
-from related.emage.evaltools.metric import Fgd, Bc, L1Div, Srgr
+import pandas as pd
 import torch
-import related.emage.utils.rotation_conversions as rc
+import transformers.utils.logging
+from scipy import linalg
+from tqdm import tqdm
+
+import PantoMatrix.emage_utils.rotation_conversions as rc
+import pipeline as pl
 import prepare
+from PantoMatrix.emage_utils.motion_rep_transfer import get_motion_rep_numpy
+from PantoMatrix.models.emage_audio.modeling_emage_audio import EmageVQModel
+from scripts import util
+from scripts.metrics_genea import Bc, Fgd, L1Div, Srgr
 
 
 def update_fgd(
@@ -29,7 +30,7 @@ def update_fgd(
   """Update FGD evaluator with one ground truth sequence and one or more predictions.
 
   Args:
-    fgd: FGD evaluator instance from related.emage.evaltools.metric.
+    fgd: FGD evaluator instance
     poses_gt: Ground truth axis-angle poses, shape (T, 165).
     poses_sampled_pred: List of predicted axis-angle poses, each shape (T, 165).
       Pass a single-element list for argmax/deterministic predictions.
@@ -49,12 +50,11 @@ def update_fgd(
 
 
 def update_bc(
-  smplx_model: smplx.SMPLX,
   bc: Bc,
   poses: np.ndarray,
   betas: np.ndarray,
   audio: np.ndarray,
-  sr: int | float,
+  sr: float,
   device: str = util.DEVICE,
 ):
   """Update BC evaluator with one sequence.
@@ -71,9 +71,9 @@ def update_bc(
     device: Device for get_motion_rep_numpy.
   """
   t = poses.shape[0]
-  motion_position = get_motion_rep_numpy(
-    smplx_model, poses, device=device, betas=betas
-  )["position"]
+  motion_position = get_motion_rep_numpy(poses, device=device, betas=betas)[
+    "position"
+  ]
   motion_position = motion_position.reshape(t, -1)
   audio_beat = bc.load_audio(
     audio,
@@ -92,7 +92,6 @@ def update_bc(
 
 
 def update_l1div(
-  smplx_model: smplx.SMPLX,
   l1div: L1Div,
   poses: np.ndarray,
   betas: np.ndarray,
@@ -107,15 +106,14 @@ def update_l1div(
     device: Device for get_motion_rep_numpy.
   """
   t = poses.shape[0]
-  motion_position = get_motion_rep_numpy(
-    smplx_model, poses, device=device, betas=betas
-  )["position"]
+  motion_position = get_motion_rep_numpy(poses, device=device, betas=betas)[
+    "position"
+  ]
   motion_position = motion_position.reshape(t, -1)
   l1div.compute(motion_position)
 
 
 def update_srgr(
-  smplx_model: smplx.SMPLX,
   srgr: Srgr,
   poses_gt: np.ndarray,
   poses_pred: np.ndarray,
@@ -126,7 +124,6 @@ def update_srgr(
   """Update SRGR evaluator with one sequence.
 
   Args:
-    smplx_model: SMPLX model for joint position conversion.
     srgr: SRGR evaluator instance from metric_modified.
     poses_pred: Predicted axis-angle poses, shape (T, 165).
     poses_gt: Ground truth axis-angle poses, shape (T, 165).
@@ -136,10 +133,10 @@ def update_srgr(
   """
   t = min(poses_pred.shape[0], poses_gt.shape[0])
   motion_position_pred = get_motion_rep_numpy(
-    smplx_model, poses_pred[:t], device=device, betas=betas
+    poses_pred[:t], device=device, betas=betas
   )["position"].reshape(t, -1)
   motion_position_gt = get_motion_rep_numpy(
-    smplx_model, poses_gt[:t], device=device, betas=betas
+    poses_gt[:t], device=device, betas=betas
   )["position"].reshape(t, -1)
   df = pd.read_csv(
     sem_path,
@@ -190,7 +187,7 @@ def calculate_frechet_distance(
   if np.iscomplexobj(covmean):
     if not np.allclose(np.diagonal(covmean).imag, 0, atol=1e-3):
       m = np.max(np.abs(covmean.imag))
-      raise ValueError("Imaginary component {}".format(m))
+      raise ValueError(f"Imaginary component {m}")
     covmean = covmean.real
 
   tr_covmean = np.trace(covmean)
@@ -254,7 +251,7 @@ class SampleDiv:
   def __init__(self):
     self.diversity_vals = []
 
-  def update(self, mean_seq_div: int | float):
+  def update(self, mean_seq_div: float):
     self.diversity_vals.append(mean_seq_div)
 
   def avg(self) -> float:
@@ -300,7 +297,7 @@ class MetricEvaluators:
   def __init__(self):
     self.fgd = Fgd(
       os.path.join(prepare.EVALTOOLS_DIR, "AESKConv_240_100.bin"),
-      os.path.join(util.SMPLX_MODEL_DIR, "smplx", "SMPLX_NEUTRAL_2020.npz"),
+      os.path.join(prepare.EVALTOOLS_DIR),
     )
     self.bc = Bc(
       os.path.join(
@@ -332,7 +329,6 @@ class MetricEvaluators:
 
 
 def update_evaluators(
-  smplx_model: smplx.SMPLX,
   evaluators: MetricEvaluators,
   file: GestureEvalFile,
   device: str = util.DEVICE,
@@ -342,7 +338,6 @@ def update_evaluators(
   update_sample_div(evaluators.sample_div, file.poses_pred)
   for poses_pred in file.poses_pred:
     update_bc(
-      smplx_model,
       evaluators.bc,
       poses_pred,
       file.betas,
@@ -350,11 +345,8 @@ def update_evaluators(
       file.sr,
       device=device,
     )
-    update_l1div(
-      smplx_model, evaluators.l1div, poses_pred, file.betas, device=device
-    )
+    update_l1div(evaluators.l1div, poses_pred, file.betas, device=device)
     update_srgr(
-      smplx_model,
       evaluators.srgr,
       file.poses_gt,
       poses_pred,
@@ -389,18 +381,26 @@ def decode_outputs(
   )
 
 
+def load_poses_gt(file_id):
+  with np.load(dataset.file_path(prepare.BEAT2_MOTION_DIR, file_id)) as f:
+    return f["poses"]
+
+
 if __name__ == "__main__":
   import argparse
-  import models
-  import dataset
-  import eval_poses as ep
+
+  from scripts import dataset, models
+  from scripts import eval_poses as ep
 
   parser = argparse.ArgumentParser(
-    description="Evaluate a gesture adapter on the test split."
+    description="Evaluate a latent pose predictor on the test split."
   )
-  parser.add_argument("weights", help="Path to adapter weights (.pth file)")
+  parser.add_argument("weights", help="Path to predictor weights (.pth file)")
   parser.add_argument(
-    "--output", "-o", default=None, metavar="PATH",
+    "--output",
+    "-o",
+    default=None,
+    metavar="PATH",
     help="Output JSON path (default: weights stem + --objmetrics.json)",
   )
   parser.add_argument("--context-size", type=int, default=150, metavar="N")
@@ -410,13 +410,16 @@ if __name__ == "__main__":
   parser.add_argument("--batch-size", type=int, default=32, metavar="N")
   parser.add_argument("--stride", type=int, default=1, metavar="N")
   parser.add_argument(
-    "--window-size", type=int, default=None, metavar="N",
+    "--window-size",
+    type=int,
+    default=None,
+    metavar="N",
     help="Sliding-window alignment size in frames (default: repeat alignment)",
   )
   args = parser.parse_args()
 
   stem, _ = os.path.splitext(args.weights)
-  out = args.output or f"{stem}--objmetrics.json"
+  out = args.output or "objmetrics.json"
 
   transformers.utils.logging.disable_progress_bar()
 
@@ -426,36 +429,33 @@ if __name__ == "__main__":
     else dataset.align_inputs_repeat
   )
 
-  adapter = models.TransformerSequenceNoBiasAdapter(
+  predictor = models.TransformerSequenceNoBiasPredictor(
     args.context_size, args.n_layers, args.model_dim, args.n_heads
   )
-  adapter.load_state_dict(torch.load(args.weights, weights_only=True))
-  adapter.eval()
-  adapter.to(util.DEVICE)
+  predictor.load_state_dict(torch.load(args.weights, weights_only=True))
+  predictor.eval()
+  predictor.to(util.DEVICE)
 
   sampler = pl.sampler_nucleus(0.2, 0.3)
   n_samples = 5
 
-  smplx_model = util.load_smplx_model()
   motion_prior = util.load_motion_prior(True)
-  all_poses_gt = np.load("data/GENEA_obj_eval--poses--BEAT2.npz")
 
   evaluators = MetricEvaluators()
   for file_id, aligned_embeds in tqdm(
-    dataset.adapter_inputs(False, align),
+    dataset.predictor_inputs(False, align),
     desc="file",
     total=len(dataset.TEST_SPLIT_FILES),
     smoothing=0,
   ):
     logits_raw = ep.make_transformer_seq_logits_with_stride(
-      adapter, args.context_size, args.stride, args.batch_size, aligned_embeds
+      predictor, args.context_size, args.stride, args.batch_size, aligned_embeds
     )
     logits = {f"{part}_index": logits_raw[part] for part in ep.BODY_PARTS}
     pred_poses = [
-      decode_outputs(motion_prior, sampler, logits)[0]
-      for _ in range(n_samples)
+      decode_outputs(motion_prior, sampler, logits)[0] for _ in range(n_samples)
     ]
-    poses_gt = all_poses_gt[file_id]
+    poses_gt = load_poses_gt(file_id)
     audio, sr = librosa.load(
       os.path.join(
         "data", "beat2", "beat_english_v2.0.0", "wave16k", f"{file_id}.wav"
@@ -464,14 +464,17 @@ if __name__ == "__main__":
     )
     betas = np.load(
       os.path.join(
-        "data", "beat2", "beat_english_v2.0.0", "smplxflame_30", f"{file_id}.npz"
+        "data",
+        "beat2",
+        "beat_english_v2.0.0",
+        "smplxflame_30",
+        f"{file_id}.npz",
       )
     )["betas"]
     sem_path = os.path.join(
       "data", "beat2", "beat_english_v2.0.0", "sem", f"{file_id}.txt"
     )
     update_evaluators(
-      smplx_model,
       evaluators,
       GestureEvalFile(poses_gt, pred_poses, betas, audio, sr, sem_path),
     )

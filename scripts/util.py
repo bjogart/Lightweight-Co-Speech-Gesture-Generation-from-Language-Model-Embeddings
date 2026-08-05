@@ -11,7 +11,7 @@ import smplx
 import numpy as np
 import os
 from datetime import datetime
-from related.emage.models.audio.modeling_emage_audio import (
+from PantoMatrix.models.emage_audio.modeling_emage_audio import (
   EmageVAEConv,
   EmageVQVAEConv,
   EmageVQModel,
@@ -19,7 +19,7 @@ from related.emage.models.audio.modeling_emage_audio import (
 )
 
 LLM_ID = "mistralai/Ministral-3-3B-Base-2512"
-SMPLX_MODEL_DIR = os.path.join("data", "emage_evaltools", "smplx_models")
+SMPLX_MODEL_DIR = os.path.join("emage_evaltools", "smplx_models")
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -69,6 +69,14 @@ def load_llm_quantized(
 
 
 def load_motion_prior(local_files_only: bool) -> EmageVQModel:
+  prev_init = EmageVQVAEConv.__init__
+
+  def vqvae_init(self, config):
+    prev_init(self, config)
+    self.post_init()
+
+  EmageVQVAEConv.__init__ = vqvae_init
+
   face_motion_vq = EmageVQVAEConv.from_pretrained(
     "H-Liu1997/emage_audio",
     subfolder="emage_vq/face",
@@ -106,7 +114,9 @@ def load_motion_prior(local_files_only: bool) -> EmageVQModel:
 
 
 def load_emage(local_files_only: bool) -> EmageAudioModel:
-  return EmageAudioModel.from_pretrained("H-Liu1997/emage_audio").eval()
+  return EmageAudioModel.from_pretrained(
+    "H-Liu1997/emage_audio", local_files_only=local_files_only
+  ).eval()
 
 
 def iso_timestamp():

@@ -1,35 +1,21 @@
-from dataset import TEST_SPLIT_FILES, adapter_inputs
-import models
-import re
-from related.emage.models.audio.modeling_emage_audio import (
-  EmageVQModel,
-  EmageAudioModel,
-)
-from typing import Callable, Optional
 import random
-import torch
-from tqdm import tqdm
-import dataset
-import util
-import pipeline as pl
-import csv
-import os
+import re
+from collections.abc import Callable
+
 import numpy as np
+import torch
+
+import pipeline as pl
+from PantoMatrix.models.emage_audio.modeling_emage_audio import (
+  EmageAudioModel,
+  EmageVQModel,
+)
+from scripts import models, util
+from scripts.dataset import TEST_SPLIT_FILES
 
 BODY_PARTS = ["face", "upper", "hands", "lower"]
 
 TEST_SPLIT_SUBSET = random.Random(12345).sample(TEST_SPLIT_FILES, 25)
-
-
-def eval_segments() -> dict[str, tuple[int, int]]:
-  splits = {}
-  with open("data/genea_eval--clip_segments.csv", newline="") as f:
-    reader = iter(csv.reader(f))
-    _header = next(reader)
-    for row in reader:
-      file_id, start, end, _ = row
-      splits[file_id] = (float(start), float(end))
-  return splits
 
 
 def slice_eval_snippet(
@@ -72,7 +58,7 @@ def make_transformer_seq_logits(
 
 
 def make_transformer_seq_logits_with_stride(
-  adapter: models.TransformerSequenceNoBiasAdapter,
+  predictor: models.TransformerSequenceNoBiasPredictor,
   context_size: int,
   stride: int,
   batch_size: int,
@@ -82,7 +68,7 @@ def make_transformer_seq_logits_with_stride(
   acc = {}
   with torch.no_grad():
     for batch in preprocess(aligned_embeds):
-      batch_preds = adapter(batch.to(util.DEVICE))
+      batch_preds = predictor(batch.to(util.DEVICE))
       for part, logits in batch_preds.items():
         acc.setdefault(part, []).append(logits[:, -stride:, :].cpu())
   return {
@@ -121,7 +107,7 @@ def make_emage_logits(
   )
 
 
-def parse_align_from_model_dir(model_dir: str) -> Optional[int]:
+def parse_align_from_model_dir(model_dir: str) -> int | None:
   window_match = re.search(r"_window(\d+)", model_dir)
   if window_match:
     window_size = int(window_match.group(1))

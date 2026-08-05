@@ -1,18 +1,20 @@
-import util
 import json
+import os
+from collections.abc import Callable
+
+import torch
+from torch import nn
 from torch.optim.adamw import AdamW
 from torch.optim.lr_scheduler import (
-  SequentialLR,
-  LRScheduler,
-  LinearLR,
   CosineAnnealingLR,
+  LinearLR,
+  LRScheduler,
+  SequentialLR,
 )
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from typing import Callable, Optional
-import os
-import torch
-import torch.nn as nn
+
+from scripts import util
 
 
 def to_device(v, device: str):
@@ -31,7 +33,7 @@ def loss_batch(
     [dict[str, torch.Tensor], dict[str, torch.Tensor]],
     torch.Tensor,
   ],
-  optim_and_scheduler: Optional[tuple[AdamW, LRScheduler]],
+  optim_and_scheduler: tuple[AdamW, LRScheduler] | None,
 ) -> int | float:
   batch = to_device(batch, util.DEVICE)
   targets = batch.pop("targets")
@@ -89,8 +91,8 @@ def train_epoch(
 
 
 def val_epoch(
-  progress_epoch: Optional[tqdm],
-  progress_train: Optional[tqdm],
+  progress_epoch: tqdm | None,
+  progress_train: tqdm | None,
   model: nn.Module,
   loss_func: Callable[
     [dict[str, torch.Tensor], dict[str, torch.Tensor]],
@@ -263,7 +265,7 @@ def cross_entropy_sequence_loss():
 def optimizer_with_schedule(
   warmup_steps: int,
   n_epochs: int,
-  lr: int | float,
+  lr: float,
   model: nn.Module,
   train_data: DataLoader,
 ) -> tuple[AdamW, LRScheduler]:
@@ -290,7 +292,7 @@ def train_model(
   ],
   train_data: DataLoader,
   val_data: DataLoader,
-  lr: int | float,
+  lr: float,
   n_epochs: int,
   warmup_steps: int,
   model_dir_stem: str,
@@ -301,11 +303,88 @@ def train_model(
   )
 
   fit(
-    f"{model_dir_stem}--{util.iso_timestamp()}",
+    model_dir_stem,
     n_epochs,
     model,
     multi_headed_loss(loss_func),
     optim_and_scheduler,
     train_data,
     val_data,
+  )
+
+
+if __name__ == "__main__":
+  import argparse
+
+  from scripts import dataset, models
+
+  parser = argparse.ArgumentParser(description="Train a latent pose predictor.")
+  parser.add_argument("output_dir", help="Output directory")
+  parser.add_argument("--context-size", type=int, default=150, metavar="N")
+  parser.add_argument("--n-layers", type=int, default=2, metavar="N")
+  parser.add_argument("--model-dim", type=int, default=768, metavar="N")
+  parser.add_argument("--n-heads", type=int, default=12, metavar="N")
+  parser.add_argument(
+    "--train-split",
+    type=str,
+    action="append",
+    default=[],
+    help="Add more training splits (default: train)",
+    choices=["train", "test", "val", "additional"],
+  )
+  parser.add_argument("--train-stride", type=int, default=25, metavar="N")
+  parser.add_argument("--base-lr", type=float, default=1e-4, metavar="N")
+  parser.add_argument("--warmup-steps", type=int, default=1000, metavar="N")
+  parser.add_argument("--n-epochs", type=int, default=8, metavar="N")
+  parser.add_argument("--batch-size", type=int, default=32, metavar="N")
+  parser.add_argument(
+    "--window-size",
+    type=int,
+    default=None,
+    metavar="N",
+    help="Sliding-window alignment size in frames (default: repeat alignment)",
+  )
+  args = parser.parse_args()
+
+  align = (
+    dataset.resample_inputs_mean_sliding_window(args.window_size)
+    if args.window_size
+    else dataset.resample_inputs_repeat
+  )
+  model = models.TransformerSequenceNoBiasPredictor(
+    args.context_size, args.n_layers, args.model_dim, args.n_heads
+  )
+  train_data = DataLoader(
+    dataset.GestureDataset(
+      "data/pack",
+      align,
+      dataset.filter_short_chunks,
+      chunk_size=args.context_size,
+      chunk_stride=args.train_stride,
+      split=args.train_split if args.train_split else ["train"],
+      shuffle_files=True,
+    ),
+    batch_size=args.batch_size,
+  )
+  val_data = DataLoader(
+    dataset.GestureDataset(
+      "data/pack",
+      align,
+      dataset.filter_short_chunks,
+      chunk_size=args.context_size,
+      chunk_stride=args.context_size,
+      split="val",
+      shuffle_files=False,
+    ),
+    batch_size=args.batch_size,
+  )
+  train_model(
+    model,
+    cross_entropy_sequence_loss(),
+    train_data,
+    val_data,
+    args.base_lr,
+    args.n_epochs,
+    args.warmup_steps,
+    args.output_dir,
   )
