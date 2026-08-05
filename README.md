@@ -7,8 +7,8 @@ as a supplement to the main report and stimulate further research.
 
 Data gathered as part of our perceptual study is published, in anonymized form,
 in the [votes/](./votes/) directory. The data is structured to resemble the
-format used by
-the[GENEA Gesture-Generation Leaderboard](https://genea-workshop.github.io/leaderboard);
+format used by the
+[GENEA Gesture-Generation Leaderboard](https://genea-workshop.github.io/leaderboard);
 the files are compatible with their
 [statistical analysis scripts](https://github.com/genea-workshop/leaderboard-statistical-analysis),
 which constituted a part of our own evaluation as well.
@@ -84,13 +84,13 @@ Running [prepare.py](./prepare.py) handles subsequent setup.
 | Operation                                                                    | Artifact               | Size on Disk | Resumable |
 | :--------------------------------------------------------------------------- | ---------------------- | -----------: | :-------: |
 | Clone [PantoMatrix](https://github.com/PantoMatrix/PantoMatrix) repository   | `./PantoMatrix/`       |     604.7 MB |           |
-| Create [data/](./data/) directory                                            | `./data/`              |       0.0 GB | &#10004;  |
+| Create `data/` directory                                                     | `./data/`              |       0.0 GB | &#10004;  |
 | Download [EMAGE evaltools](https://huggingface.co/H-Liu1997/emage_evaltools) | `./emage_evaltools/`   |     184.9 MB |           |
 | Download BEAT2                                                               | `./data/beat2/`        |      20.3 GB |           |
 | Precompute foot contact positions                                            | `./data/foot_contact/` |        <1 MB | &#10004;  |
 | Precompute text embeddings                                                   | `./data/text_embeds/`  |       2.8 GB | &#10004;  |
 | Precompute codebook indices                                                  | `./data/pose_idxs/`    |      12.8 MB | &#10004;  |
-| Pack related data together to minimize disk IO                               | `./data/pack/`         |       6.1 GB | &#10004;  |
+| Pack related data to minimize disk training disk IO                          | `./data/pack/`         |       6.1 GB | &#10004;  |
 
 Some operations can take substantial amounts of time. Operations marked as
 resumable can be interrupted; if so, running `python prepare.py` again will
@@ -104,7 +104,7 @@ script. Once `prepare.py` runs to conclusion succesfully, foot contact
 positions, text embeddings, and codebook index directory are no longer necessary
 to any script, and can be deleted safely.
 
-### References
+---
 
 Some scripts were adapted from prior work.
 
