@@ -1,0 +1,253 @@
+user,input_code,model_a,model_b,winner,is_strong,juiceOptions,juiceOtherReason
+R_2kiXagS7ppvrzbJ,11_nidal_0_73_73,adapter,EMAGE,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2kiXagS7ppvrzbJ,2_scott_0_65_65,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2kiXagS7ppvrzbJ,10_kieks_0_8_8,EMAGE,adapter,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2kiXagS7ppvrzbJ,28_tiffnay_0_2_2,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness""]",
+R_2kiXagS7ppvrzbJ,1_wayne_0_87_87,BEAT2,EMAGE,model_a,False,"[""MotionSmoothness"", ""RecognisableGestures""]",Left is less exaggerated 
+R_2kiXagS7ppvrzbJ,6_carla_0_103_103,BEAT2,EMAGE,model_a,True,"[""UnrealisticMotion"", ""MotionSmoothness"", ""RecognisableGestures""]",
+R_28SyVCWpsf3LQRt,7_sophie_0_8_8,adapter,EMAGE,model_b,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_28SyVCWpsf3LQRt,5_stewart_0_8_8,BEAT2,adapter,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_28SyVCWpsf3LQRt,2_scott_0_7_7,BEAT2,EMAGE,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_28SyVCWpsf3LQRt,1_wayne_0_3_3,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_28SyVCWpsf3LQRt,1_wayne_0_65_65,adapter,EMAGE,model_a,False,"[""UnrealisticMotion"", ""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_28SyVCWpsf3LQRt,2_scott_0_65_65,EMAGE,BEAT2,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8jEYCqQ5jdGLNgB,22_luqi_0_73_73,BEAT2,EMAGE,model_b,False,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8jEYCqQ5jdGLNgB,2_scott_0_8_8,adapter,BEAT2,model_a,False,"[""AmountIntensityOfMotion""]",
+R_8jEYCqQ5jdGLNgB,22_luqi_0_95_95,BEAT2,EMAGE,model_b,False,[],Positioning of the upper body
+R_8jEYCqQ5jdGLNgB,23_hailing_0_111_111,BEAT2,EMAGE,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8jEYCqQ5jdGLNgB,11_nidal_0_81_81,BEAT2,adapter,tie,False,"[""MotionSmoothness""]",
+R_8jEYCqQ5jdGLNgB,4_lawrence_0_87_87,EMAGE,BEAT2,model_b,False,"[""AmountIntensityOfMotion""]",
+R_8GCX14nyepjCVX3,11_nidal_0_3_3,EMAGE,adapter,model_a,False,"[""AmountIntensityOfMotion""]",
+R_8GCX14nyepjCVX3,11_nidal_0_81_81,EMAGE,BEAT2,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8GCX14nyepjCVX3,2_scott_0_2_2,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8GCX14nyepjCVX3,5_stewart_0_7_7,adapter,EMAGE,tie,False,"[""MotionSmoothness""]",
+R_8GCX14nyepjCVX3,3_solomon_0_111_111,BEAT2,EMAGE,model_a,False,"[""AmountIntensityOfMotion""]",
+R_8GCX14nyepjCVX3,23_hailing_0_81_81,adapter,BEAT2,model_b,True,"[""RecognisableGestures""]",
+R_23keCXBbcLa1v7w,7_sophie_0_8_8,EMAGE,BEAT2,model_b,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_23keCXBbcLa1v7w,4_lawrence_0_65_65,BEAT2,EMAGE,model_b,True,"[""AmountIntensityOfMotion""]",The left video is too much motion as I see it
+R_23keCXBbcLa1v7w,16_jorge_0_103_103,adapter,EMAGE,model_b,True,"[""UnrealisticMotion"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",the left one has little veriety in motions
+R_23keCXBbcLa1v7w,4_lawrence_0_81_81,adapter,EMAGE,model_b,True,"[""AmountIntensityOfMotion""]",the left video has little veriety in the motions of the hands
+R_23keCXBbcLa1v7w,5_stewart_0_65_65,BEAT2,EMAGE,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_23keCXBbcLa1v7w,22_luqi_0_103_103,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2dxLCvlWiclZTKm,28_tiffnay_0_73_73,BEAT2,adapter,model_a,True,"[""MotionSmoothness""]",
+R_2dxLCvlWiclZTKm,23_hailing_0_95_95,adapter,BEAT2,model_b,True,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2dxLCvlWiclZTKm,11_nidal_0_3_3,BEAT2,adapter,model_b,True,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2dxLCvlWiclZTKm,3_solomon_0_5_5,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2dxLCvlWiclZTKm,2_scott_0_1_1,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2dxLCvlWiclZTKm,2_scott_0_87_87,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2Crm9n3Bqr68zpI,2_scott_0_3_3,EMAGE,BEAT2,model_b,False,"[""MotionSmoothness""]",
+R_2Crm9n3Bqr68zpI,6_carla_0_87_87,BEAT2,adapter,model_a,True,"[""MotionSmoothness""]",
+R_2Crm9n3Bqr68zpI,4_lawrence_0_87_87,EMAGE,adapter,model_a,False,[],The symmetry in the movement of the right video felt unnatural
+R_2Crm9n3Bqr68zpI,1_wayne_0_2_2,EMAGE,BEAT2,model_b,False,[],I like the stance more
+R_2Crm9n3Bqr68zpI,22_luqi_0_103_103,BEAT2,EMAGE,tie,False,"[""UnrealisticMotion""]",Part underneath torso feel unnaturally static
+R_2Crm9n3Bqr68zpI,16_jorge_0_2_2,adapter,EMAGE,model_b,True,[],Less symmetry feels more natural
+R_2q8LVE5G07w6uy3,7_sophie_0_8_8,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2q8LVE5G07w6uy3,4_lawrence_0_65_65,BEAT2,EMAGE,tie,False,"[""AmountIntensityOfMotion""]",Fingers are very far apart for left video
+R_2q8LVE5G07w6uy3,16_jorge_0_103_103,adapter,EMAGE,model_b,True,"[""AmountIntensityOfMotion""]",Fingers move too much in left video
+R_2q8LVE5G07w6uy3,4_lawrence_0_81_81,adapter,EMAGE,model_b,True,"[""AmountIntensityOfMotion""]",
+R_2q8LVE5G07w6uy3,5_stewart_0_65_65,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness""]",
+R_2q8LVE5G07w6uy3,22_luqi_0_103_103,adapter,BEAT2,model_b,False,"[""UnrealisticMotion"", ""AmountIntensityOfMotion""]",
+R_8KxWcXo4Cf7PvWi,11_nidal_0_73_73,adapter,EMAGE,model_b,False,"[""MotionSmoothness"", ""RecognisableGestures""]","The video on the left has a lot of finger twitching. In my opinion this does happen in real life, but not as mirrored between the right and left hand and generally not as much."
+R_8KxWcXo4Cf7PvWi,2_scott_0_65_65,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",It feels more natural that the right and left arm are not mirroring each other on the right
+R_8KxWcXo4Cf7PvWi,10_kieks_0_8_8,EMAGE,adapter,model_a,False,"[""UnrealisticMotion"", ""RecognisableGestures""]",
+R_8KxWcXo4Cf7PvWi,28_tiffnay_0_2_2,EMAGE,BEAT2,model_a,False,[],Both videos seem realistic but the way the fingers are spread in the right video seems less human like (they also seem longer than on the left)
+R_8KxWcXo4Cf7PvWi,1_wayne_0_87_87,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8KxWcXo4Cf7PvWi,6_carla_0_103_103,BEAT2,EMAGE,model_b,False,"[""UnrealisticMotion"", ""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]","The right has a glitch which would make the left better, but the over all gestures on the right feel more natural to me because of the intensity and the fingers are less widely spread (this feels unnatural on the left)"
+R_8fZhBZtRjKkQS8P,11_nidal_0_3_3,BEAT2,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_8fZhBZtRjKkQS8P,22_luqi_0_87_87,BEAT2,EMAGE,model_b,False,"[""RecognisableGestures""]",
+R_8fZhBZtRjKkQS8P,28_tiffnay_0_2_2,adapter,EMAGE,tie,False,[],Equal
+R_8fZhBZtRjKkQS8P,16_jorge_0_2_2,BEAT2,EMAGE,model_b,False,"[""MotionSmoothness""]",
+R_8fZhBZtRjKkQS8P,27_yingqing_0_1_1,adapter,EMAGE,model_b,False,"[""RecognisableGestures""]",
+R_8fZhBZtRjKkQS8P,5_stewart_0_103_103,EMAGE,adapter,model_a,False,"[""RecognisableGestures""]",
+R_2IzR3mfJyWQ52zQ,27_yingqing_0_65_65,EMAGE,BEAT2,model_a,False,"[""MotionSmoothness""]",
+R_2IzR3mfJyWQ52zQ,7_sophie_0_8_8,adapter,BEAT2,model_b,False,"[""RecognisableGestures""]",
+R_2IzR3mfJyWQ52zQ,4_lawrence_0_95_95,EMAGE,adapter,tie,False,"[""UnrealisticMotion""]",
+R_2IzR3mfJyWQ52zQ,16_jorge_0_103_103,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness""]",
+R_2IzR3mfJyWQ52zQ,22_luqi_0_73_73,adapter,EMAGE,tie,False,"[""AmountIntensityOfMotion""]",
+R_2IzR3mfJyWQ52zQ,3_solomon_0_5_5,adapter,EMAGE,model_a,False,"[""MotionSmoothness""]",
+R_80Yan1aN0MhDxHn,22_luqi_0_73_73,BEAT2,EMAGE,model_b,False,"[""RecognisableGestures""]",
+R_80Yan1aN0MhDxHn,2_scott_0_8_8,adapter,BEAT2,model_b,False,"[""RecognisableGestures""]",
+R_80Yan1aN0MhDxHn,22_luqi_0_95_95,BEAT2,EMAGE,model_a,False,"[""RecognisableGestures""]",
+R_80Yan1aN0MhDxHn,23_hailing_0_111_111,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_80Yan1aN0MhDxHn,11_nidal_0_81_81,BEAT2,adapter,model_a,True,"[""RecognisableGestures""]",
+R_80Yan1aN0MhDxHn,4_lawrence_0_87_87,EMAGE,BEAT2,model_a,False,"[""RecognisableGestures""]",
+R_868ST5ouGw3RwUb,10_kieks_0_95_95,adapter,BEAT2,model_b,True,[],More natural gestures
+R_868ST5ouGw3RwUb,28_tiffnay_0_81_81,EMAGE,adapter,model_a,True,[],
+R_868ST5ouGw3RwUb,27_yingqing_0_103_103,BEAT2,EMAGE,model_a,True,[],the face is more directly looking directly in the eyes
+R_868ST5ouGw3RwUb,27_yingqing_0_73_73,adapter,EMAGE,model_a,True,[],position of the head: lips must be readable
+R_868ST5ouGw3RwUb,11_nidal_0_81_81,adapter,EMAGE,model_b,True,"[""RecognisableGestures""]",
+R_868ST5ouGw3RwUb,16_jorge_0_65_65,adapter,EMAGE,tie,False,"[""AmountIntensityOfMotion""]",
+R_8KcYieCU9V4pg6W,11_nidal_0_3_3,EMAGE,adapter,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8KcYieCU9V4pg6W,11_nidal_0_81_81,EMAGE,BEAT2,model_a,True,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8KcYieCU9V4pg6W,2_scott_0_2_2,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8KcYieCU9V4pg6W,5_stewart_0_7_7,adapter,EMAGE,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8KcYieCU9V4pg6W,3_solomon_0_111_111,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8KcYieCU9V4pg6W,23_hailing_0_81_81,adapter,BEAT2,model_b,True,"[""UnrealisticMotion"", ""MotionSmoothness"", ""RecognisableGestures""]",
+R_2G6ZsF0eRh7UbrW,28_tiffnay_0_73_73,BEAT2,adapter,tie,False,"[""UnrealisticMotion""]",
+R_2G6ZsF0eRh7UbrW,23_hailing_0_95_95,adapter,BEAT2,model_b,False,"[""AmountIntensityOfMotion""]",intensiteit van bewegen ligt ook aan emotie
+R_2G6ZsF0eRh7UbrW,11_nidal_0_3_3,BEAT2,adapter,tie,False,[],idem vorige film
+R_2G6ZsF0eRh7UbrW,3_solomon_0_5_5,adapter,BEAT2,model_b,True,"[""AmountIntensityOfMotion""]",
+R_2G6ZsF0eRh7UbrW,2_scott_0_1_1,adapter,BEAT2,tie,False,[],ligt weer aan hoe intens de emotie /boodschap is
+R_2G6ZsF0eRh7UbrW,2_scott_0_87_87,EMAGE,BEAT2,tie,False,[],idem vorige film:intensiteit boodschap
+R_8cRLaMw18ykX8Lq,4_lawrence_0_81_81,adapter,BEAT2,model_b,False,[],better differentiation of movements; more asymetric too
+R_8cRLaMw18ykX8Lq,27_yingqing_0_103_103,BEAT2,adapter,model_a,False,[],not only symetric movements
+R_8cRLaMw18ykX8Lq,22_luqi_0_95_95,EMAGE,adapter,model_a,False,[],better diffentiation of movements
+R_8cRLaMw18ykX8Lq,5_stewart_0_7_7,EMAGE,BEAT2,model_b,False,[],"movements seem more purpose full, more goal- oriented"
+R_8cRLaMw18ykX8Lq,1_wayne_0_4_4,EMAGE,BEAT2,model_a,False,[],"differentiation of the movements of the hands, and the other movements "
+R_8cRLaMw18ykX8Lq,3_solomon_0_111_111,adapter,EMAGE,model_b,False,[],better differentiation of movements
+R_8ErRHlRqji1qqK8,2_scott_0_3_3,EMAGE,BEAT2,model_a,True,"[""MotionSmoothness""]",
+R_8ErRHlRqji1qqK8,6_carla_0_87_87,BEAT2,adapter,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8ErRHlRqji1qqK8,4_lawrence_0_87_87,EMAGE,adapter,model_b,True,"[""MotionSmoothness""]",
+R_8ErRHlRqji1qqK8,1_wayne_0_2_2,EMAGE,BEAT2,model_b,False,"[""RecognisableGestures""]",
+R_8ErRHlRqji1qqK8,22_luqi_0_103_103,BEAT2,EMAGE,tie,False,"[""UnrealisticMotion""]",
+R_8ErRHlRqji1qqK8,16_jorge_0_2_2,adapter,EMAGE,tie,False,"[""MotionSmoothness""]",
+R_2MKcrxXXBJYr3sl,1_wayne_0_73_73,BEAT2,adapter,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",the type of gesture (extravert (left) vs introvert (right)
+R_2MKcrxXXBJYr3sl,5_stewart_0_65_65,adapter,BEAT2,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2MKcrxXXBJYr3sl,23_hailing_0_103_103,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2MKcrxXXBJYr3sl,6_carla_0_103_103,BEAT2,adapter,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2MKcrxXXBJYr3sl,23_hailing_0_81_81,adapter,EMAGE,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2MKcrxXXBJYr3sl,16_jorge_0_1_1,EMAGE,adapter,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_24dDk3qB8aiiKwc,4_lawrence_0_81_81,adapter,BEAT2,model_a,False,"[""AmountIntensityOfMotion""]",
+R_24dDk3qB8aiiKwc,27_yingqing_0_103_103,BEAT2,adapter,model_a,True,"[""RecognisableGestures""]",
+R_24dDk3qB8aiiKwc,22_luqi_0_95_95,EMAGE,adapter,tie,False,[],
+R_24dDk3qB8aiiKwc,5_stewart_0_7_7,EMAGE,BEAT2,model_b,True,"[""RecognisableGestures""]",
+R_24dDk3qB8aiiKwc,1_wayne_0_4_4,EMAGE,BEAT2,model_b,False,"[""AmountIntensityOfMotion""]",
+R_24dDk3qB8aiiKwc,3_solomon_0_111_111,adapter,EMAGE,model_b,False,"[""MotionSmoothness""]",
+R_8GC6nxgOZotXnAO,23_hailing_0_111_111,adapter,BEAT2,model_b,True,"[""MotionSmoothness""]",more fluid continuation of motion compared to the other where different gestures felt pasted together with unnatural pauses between them.
+R_8GC6nxgOZotXnAO,1_wayne_0_6_6,BEAT2,adapter,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]","Less unnatural pauses between motions; less ""returning to base pose"""
+R_8GC6nxgOZotXnAO,7_sophie_0_65_65,EMAGE,adapter,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8GC6nxgOZotXnAO,10_kieks_0_95_95,EMAGE,adapter,model_a,False,[],Less repeated symmetrical motions
+R_8GC6nxgOZotXnAO,2_scott_0_87_87,BEAT2,adapter,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",Less unnatural pauses between motions
+R_8GC6nxgOZotXnAO,10_kieks_0_8_8,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""RecognisableGestures""]",Less unnatural symmetry of motion; less unnatural pauses between motions; less only finger wiggling
+R_2rUDj6WhJd7crgz,10_kieks_0_73_73,adapter,BEAT2,model_b,True,"[""RecognisableGestures""]",
+R_2rUDj6WhJd7crgz,2_scott_0_7_7,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2rUDj6WhJd7crgz,6_carla_0_87_87,EMAGE,BEAT2,tie,False,"[""RecognisableGestures""]",
+R_2rUDj6WhJd7crgz,27_yingqing_0_65_65,adapter,BEAT2,model_a,True,"[""UnrealisticMotion""]",
+R_2rUDj6WhJd7crgz,4_lawrence_0_95_95,EMAGE,BEAT2,model_a,False,"[""MotionSmoothness""]",
+R_2rUDj6WhJd7crgz,5_stewart_0_8_8,adapter,EMAGE,model_a,False,"[""AmountIntensityOfMotion""]",
+R_8r16zkcrb9qvpNW,4_lawrence_0_81_81,adapter,BEAT2,model_b,True,"[""UnrealisticMotion"", ""MotionSmoothness""]",
+R_8r16zkcrb9qvpNW,27_yingqing_0_103_103,BEAT2,adapter,model_b,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8r16zkcrb9qvpNW,22_luqi_0_95_95,EMAGE,adapter,model_a,False,"[""RecognisableGestures""]",
+R_8r16zkcrb9qvpNW,5_stewart_0_7_7,EMAGE,BEAT2,model_b,False,"[""AmountIntensityOfMotion""]",
+R_8r16zkcrb9qvpNW,1_wayne_0_4_4,EMAGE,BEAT2,model_a,False,"[""RecognisableGestures""]",
+R_8r16zkcrb9qvpNW,3_solomon_0_111_111,adapter,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2tDvhvSkRb0jIwV,11_nidal_0_73_73,adapter,EMAGE,model_b,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2tDvhvSkRb0jIwV,2_scott_0_65_65,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2tDvhvSkRb0jIwV,10_kieks_0_8_8,EMAGE,adapter,model_a,False,"[""MotionSmoothness""]",
+R_2tDvhvSkRb0jIwV,28_tiffnay_0_2_2,EMAGE,BEAT2,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2tDvhvSkRb0jIwV,1_wayne_0_87_87,BEAT2,EMAGE,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2tDvhvSkRb0jIwV,6_carla_0_103_103,BEAT2,EMAGE,tie,False,[],
+R_8PcMpp5uVGqgHtv,7_sophie_0_111_111,BEAT2,adapter,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8PcMpp5uVGqgHtv,1_wayne_0_4_4,EMAGE,adapter,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8PcMpp5uVGqgHtv,1_wayne_0_73_73,EMAGE,adapter,model_b,False,"[""MotionSmoothness""]",
+R_8PcMpp5uVGqgHtv,1_wayne_0_65_65,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8PcMpp5uVGqgHtv,3_solomon_0_2_2,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8PcMpp5uVGqgHtv,2_scott_0_7_7,adapter,EMAGE,model_a,False,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8pWH0UALAZdTb3Z,27_yingqing_0_73_73,BEAT2,EMAGE,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8pWH0UALAZdTb3Z,10_kieks_0_8_8,BEAT2,EMAGE,tie,False,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8pWH0UALAZdTb3Z,7_sophie_0_73_73,EMAGE,adapter,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8pWH0UALAZdTb3Z,11_nidal_0_111_111,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8pWH0UALAZdTb3Z,5_stewart_0_8_8,BEAT2,EMAGE,model_b,True,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8pWH0UALAZdTb3Z,16_jorge_0_65_65,BEAT2,adapter,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8htne0vfQW1cvmW,1_wayne_0_3_3,adapter,EMAGE,model_b,False,"[""RecognisableGestures""]",
+R_8htne0vfQW1cvmW,28_tiffnay_0_73_73,EMAGE,BEAT2,model_b,False,"[""AmountIntensityOfMotion""]",
+R_8htne0vfQW1cvmW,27_yingqing_0_1_1,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8htne0vfQW1cvmW,16_jorge_0_1_1,BEAT2,adapter,model_b,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8htne0vfQW1cvmW,27_yingqing_0_103_103,adapter,EMAGE,tie,False,"[""AmountIntensityOfMotion""]",
+R_8htne0vfQW1cvmW,6_carla_0_65_65,EMAGE,adapter,tie,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8NzaBn4IIDq5yQg,1_wayne_0_3_3,adapter,EMAGE,model_b,True,"[""MotionSmoothness""]",
+R_8NzaBn4IIDq5yQg,28_tiffnay_0_73_73,EMAGE,BEAT2,model_b,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8NzaBn4IIDq5yQg,27_yingqing_0_1_1,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8NzaBn4IIDq5yQg,16_jorge_0_1_1,BEAT2,adapter,model_b,False,"[""RecognisableGestures""]",
+R_8NzaBn4IIDq5yQg,27_yingqing_0_103_103,adapter,EMAGE,tie,False,[],
+R_8NzaBn4IIDq5yQg,6_carla_0_65_65,EMAGE,adapter,model_b,False,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8aX3eWvrgstrww4,6_carla_0_87_87,adapter,EMAGE,model_a,False,"[""RecognisableGestures""]",
+R_8aX3eWvrgstrww4,6_carla_0_65_65,adapter,BEAT2,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8aX3eWvrgstrww4,3_solomon_0_5_5,BEAT2,EMAGE,model_a,False,"[""UnrealisticMotion""]",
+R_8aX3eWvrgstrww4,7_sophie_0_65_65,BEAT2,EMAGE,model_a,False,"[""MotionSmoothness""]",
+R_8aX3eWvrgstrww4,7_sophie_0_111_111,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8aX3eWvrgstrww4,1_wayne_0_3_3,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_2QMGRAbtJgTvGYF,7_sophie_0_65_65,BEAT2,adapter,model_a,True,"[""AmountIntensityOfMotion""]",
+R_2QMGRAbtJgTvGYF,11_nidal_0_73_73,adapter,BEAT2,model_b,True,"[""RecognisableGestures""]",
+R_2QMGRAbtJgTvGYF,2_scott_0_1_1,adapter,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2QMGRAbtJgTvGYF,6_carla_0_73_73,EMAGE,adapter,model_a,False,"[""RecognisableGestures""]",
+R_2QMGRAbtJgTvGYF,23_hailing_0_95_95,adapter,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2QMGRAbtJgTvGYF,28_tiffnay_0_81_81,BEAT2,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2LwJpvX5c8Oa1pL,11_nidal_0_3_3,EMAGE,adapter,model_a,True,"[""UnrealisticMotion"", ""RecognisableGestures""]",
+R_2LwJpvX5c8Oa1pL,11_nidal_0_81_81,EMAGE,BEAT2,model_a,True,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2LwJpvX5c8Oa1pL,2_scott_0_2_2,BEAT2,EMAGE,model_a,False,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_2LwJpvX5c8Oa1pL,5_stewart_0_7_7,adapter,EMAGE,model_b,True,"[""UnrealisticMotion"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",The man on the left video makes multiple strange movements with his hands
+R_2LwJpvX5c8Oa1pL,3_solomon_0_111_111,BEAT2,EMAGE,tie,False,"[""RecognisableGestures""]",The movements in both video's are recognizable and so both possible in real life.
+R_2LwJpvX5c8Oa1pL,23_hailing_0_81_81,adapter,BEAT2,model_b,True,"[""UnrealisticMotion"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",The woman on the left video does not move much; only with her hands and fingers. This seems
+R_2ILWeAMkNdDpstz,6_carla_0_87_87,adapter,EMAGE,model_a,False,"[""AmountIntensityOfMotion""]",
+R_2ILWeAMkNdDpstz,6_carla_0_65_65,adapter,BEAT2,model_b,False,"[""MotionSmoothness""]",
+R_2ILWeAMkNdDpstz,3_solomon_0_5_5,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2ILWeAMkNdDpstz,7_sophie_0_65_65,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2ILWeAMkNdDpstz,7_sophie_0_111_111,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness""]",
+R_2ILWeAMkNdDpstz,1_wayne_0_3_3,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8SbPOFs6Gnm9umd,4_lawrence_0_81_81,adapter,BEAT2,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8SbPOFs6Gnm9umd,27_yingqing_0_103_103,BEAT2,adapter,model_a,True,"[""MotionSmoothness""]",
+R_8SbPOFs6Gnm9umd,22_luqi_0_95_95,EMAGE,adapter,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8SbPOFs6Gnm9umd,5_stewart_0_7_7,EMAGE,BEAT2,tie,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8SbPOFs6Gnm9umd,1_wayne_0_4_4,EMAGE,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8SbPOFs6Gnm9umd,3_solomon_0_111_111,adapter,EMAGE,tie,False,"[""UnrealisticMotion""]",
+R_82wPZYmgqPZGBET,11_nidal_0_3_3,EMAGE,adapter,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_82wPZYmgqPZGBET,11_nidal_0_81_81,EMAGE,BEAT2,model_b,False,"[""MotionSmoothness""]",
+R_82wPZYmgqPZGBET,2_scott_0_2_2,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness""]",
+R_82wPZYmgqPZGBET,5_stewart_0_7_7,adapter,EMAGE,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",Left to symmetrical
+R_82wPZYmgqPZGBET,3_solomon_0_111_111,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_82wPZYmgqPZGBET,23_hailing_0_81_81,adapter,BEAT2,model_b,True,"[""AmountIntensityOfMotion""]",
+R_8fozwionl59VQh3,2_scott_0_111_111,BEAT2,adapter,model_a,True,"[""MotionSmoothness""]",
+R_8fozwionl59VQh3,27_yingqing_0_1_1,BEAT2,adapter,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8fozwionl59VQh3,2_scott_0_1_1,EMAGE,BEAT2,tie,False,"[""AmountIntensityOfMotion""]",
+R_8fozwionl59VQh3,3_solomon_0_4_4,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness""]",
+R_8fozwionl59VQh3,23_hailing_0_103_103,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8fozwionl59VQh3,10_kieks_0_5_5,EMAGE,adapter,model_a,True,"[""MotionSmoothness""]",
+R_8TQWQrNijw9LQrq,6_carla_0_73_73,EMAGE,BEAT2,model_b,True,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8TQWQrNijw9LQrq,2_scott_0_111_111,EMAGE,adapter,tie,False,"[""RecognisableGestures""]",
+R_8TQWQrNijw9LQrq,11_nidal_0_73_73,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8TQWQrNijw9LQrq,2_scott_0_3_3,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_8TQWQrNijw9LQrq,5_stewart_0_103_103,BEAT2,EMAGE,model_b,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8TQWQrNijw9LQrq,22_luqi_0_87_87,BEAT2,adapter,model_b,False,"[""UnrealisticMotion"", ""RecognisableGestures""]",
+R_2FIPBz6hslGRi2Q,4_lawrence_0_65_65,BEAT2,adapter,model_a,False,"[""RecognisableGestures""]",
+R_2FIPBz6hslGRi2Q,2_scott_0_2_2,BEAT2,adapter,model_a,True,"[""UnrealisticMotion""]",
+R_2FIPBz6hslGRi2Q,7_sophie_0_111_111,adapter,EMAGE,model_b,True,"[""AmountIntensityOfMotion""]",
+R_2FIPBz6hslGRi2Q,10_kieks_0_5_5,BEAT2,EMAGE,model_b,False,[],Synchroon bewegen van links en rechts komt voor mij minder realistisch over
+R_2FIPBz6hslGRi2Q,28_tiffnay_0_65_65,EMAGE,adapter,model_a,True,"[""AmountIntensityOfMotion""]",
+R_2FIPBz6hslGRi2Q,23_hailing_0_81_81,BEAT2,EMAGE,model_a,False,"[""RecognisableGestures""]",
+R_8TBgFw0lyChInbJ,11_nidal_0_3_3,BEAT2,EMAGE,tie,False,"[""MotionSmoothness"", ""RecognisableGestures""]",Beide vrij realistisch 
+R_8TBgFw0lyChInbJ,22_luqi_0_87_87,BEAT2,EMAGE,model_b,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_8TBgFw0lyChInbJ,28_tiffnay_0_2_2,adapter,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",Rechts meer afwisseling in de bewegingen. Links alle bewegingen in hetzelfde gebied
+R_8TBgFw0lyChInbJ,16_jorge_0_2_2,BEAT2,EMAGE,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",Links staat d man zo gek te wiebelen
+R_8TBgFw0lyChInbJ,27_yingqing_0_1_1,adapter,EMAGE,tie,False,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_8TBgFw0lyChInbJ,5_stewart_0_103_103,EMAGE,adapter,model_a,True,"[""UnrealisticMotion""]",Rechts staat de man doodstil en vrieskoud met handen
+R_2ni0aXra6SOHwCV,6_carla_0_87_87,adapter,EMAGE,tie,False,[],"Left image has very similar movements l/r, almost like a mirror/robot. Right image is articulating wildly but unsure if thats good since I dont hear the message."
+R_2ni0aXra6SOHwCV,6_carla_0_65_65,adapter,BEAT2,model_b,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",Again left was too symmetrical for me.
+R_2ni0aXra6SOHwCV,3_solomon_0_5_5,BEAT2,EMAGE,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2ni0aXra6SOHwCV,7_sophie_0_65_65,BEAT2,EMAGE,tie,False,[],Bit ofa weird posture/view angle.
+R_2ni0aXra6SOHwCV,7_sophie_0_111_111,BEAT2,EMAGE,model_a,False,"[""UnrealisticMotion"", ""MotionSmoothness""]",
+R_2ni0aXra6SOHwCV,1_wayne_0_3_3,BEAT2,EMAGE,model_a,False,"[""UnrealisticMotion"", ""MotionSmoothness""]",
+R_2OBmo24LF3euloi,7_sophie_0_111_111,BEAT2,adapter,model_a,True,"[""MotionSmoothness"", ""RecognisableGestures""]",
+R_2OBmo24LF3euloi,1_wayne_0_4_4,EMAGE,adapter,model_b,True,"[""AmountIntensityOfMotion""]",Looking more decisive
+R_2OBmo24LF3euloi,1_wayne_0_73_73,EMAGE,adapter,model_a,True,[], Variation in gestures
+R_2OBmo24LF3euloi,1_wayne_0_65_65,EMAGE,BEAT2,tie,False,"[""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2OBmo24LF3euloi,3_solomon_0_2_2,BEAT2,EMAGE,tie,False,[],Both looking helpless and erratic 
+R_2OBmo24LF3euloi,2_scott_0_7_7,adapter,EMAGE,model_a,False,"[""MotionSmoothness""]",
+R_2n01UPCxszn6dSw,1_wayne_0_73_73,BEAT2,adapter,model_b,False,"[""MotionSmoothness""]",
+R_2n01UPCxszn6dSw,5_stewart_0_65_65,adapter,BEAT2,model_a,True,"[""MotionSmoothness""]",
+R_2n01UPCxszn6dSw,23_hailing_0_103_103,adapter,BEAT2,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2n01UPCxszn6dSw,6_carla_0_103_103,BEAT2,adapter,model_a,True,"[""MotionSmoothness""]",
+R_2n01UPCxszn6dSw,23_hailing_0_81_81,adapter,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2n01UPCxszn6dSw,16_jorge_0_1_1,EMAGE,adapter,model_b,False,"[""MotionSmoothness""]",
+R_2QgCZBHds7AteBT,2_scott_0_111_111,EMAGE,BEAT2,model_a,False,"[""MotionSmoothness"", ""AmountIntensityOfMotion"", ""RecognisableGestures""]",
+R_2QgCZBHds7AteBT,1_wayne_0_73_73,BEAT2,EMAGE,tie,False,[],beide onnatuurlijk
+R_2QgCZBHds7AteBT,28_tiffnay_0_2_2,adapter,BEAT2,model_b,True,"[""MotionSmoothness"", ""AmountIntensityOfMotion""]",
+R_2QgCZBHds7AteBT,28_tiffnay_0_65_65,BEAT2,adapter,tie,False,[],beide onnatuurlijk
+R_2QgCZBHds7AteBT,23_hailing_0_111_111,EMAGE,adapter,model_b,False,[],
+R_2QgCZBHds7AteBT,28_tiffnay_0_81_81,adapter,BEAT2,model_b,False,[],
+R_2oEEOSROkAM54aK,27_yingqing_0_73_73,BEAT2,EMAGE,model_b,False,"[""AmountIntensityOfMotion""]",
+R_2oEEOSROkAM54aK,10_kieks_0_8_8,BEAT2,EMAGE,model_b,False,"[""RecognisableGestures""]",
+R_2oEEOSROkAM54aK,7_sophie_0_73_73,EMAGE,adapter,model_a,True,"[""RecognisableGestures""]",
+R_2oEEOSROkAM54aK,11_nidal_0_111_111,EMAGE,BEAT2,model_b,False,"[""MotionSmoothness""]",
+R_2oEEOSROkAM54aK,5_stewart_0_8_8,BEAT2,EMAGE,model_a,True,"[""MotionSmoothness""]",
+R_2oEEOSROkAM54aK,16_jorge_0_65_65,BEAT2,adapter,model_b,False,"[""MotionSmoothness""]",
